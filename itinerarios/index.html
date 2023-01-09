@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,500;0,700;1,200;1,600&family=Libre+Franklin:wght@200;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="itinerarios.css">
+    <title>Itinerarios</title>
+</head>
+<body>
+    <h2>Diseño de itinerarios</h2>
+
+    <form action="" class="fechaYLugar">
+        <label for="lugar" class="lugarLabel">Lugar</label>
+        <input type="text" class="lugarInput" id="lugarInput">        
+    </form>
+    <h3></h3>
+    
+    <div class="contInput">
+        <input type="date" name="intro" id="intro">
+        <input type="date" name="outro" id="outro">
+        <button id="jornadas" onclick="jornadas()">jornadas</button>
+    </div>
+    <div class="contCamp">
+        <label for="inicio">Inicio</label>
+        <input type="text" name="inicio" id="inicio" placeholder="estacion, ciudad, cb" class="inputCell" >
+        <input type="number" name="distanciaTramoI" id="distanciaTramoI" value="0" class="inputCell">Km
+        <input type="number" name="tiempoJornadaI" id="tiempoJornadaI" value="0" class="inputCell">hs<br>     
+        <label for="objetivo">Cierre</label>
+        <input type="text" name="objetivo" id="objetivo" placeholder="objetivo" class="inputCell" >
+        <input type="number" name="distanciaTramoO" id="distanciaTramoO" placeholder="distancia del tramo" class="inputCell">Km
+        <input type="number" name="tiempoJornadaO" id="tiempoJornadaO" placeholder="tiempo de la Jornada" class="inputCell">hs
+        <button name="insert" id="insert" onclick="datosIniciales()">Datos Iniciales</button>
+    </div>
+    <div class="contCamp">
+        <label for="jornada">Jornada</label>
+        <input type="text" name="nameCamp" id="nameCamp" placeholder="destino de jornada" class="inputCell" >
+        <input type="number" name="distanciaTramoJ" id="distanciaTramoJ" placeholder="distancia del tramo" class="inputCell">Km
+        <input type="number" name="tiempoJornadaJ" id="tiempoJornadaJ" placeholder="tiempo de la Jornada" class="inputCell">hs
+        <button name="insert" id="insert" onclick="insert()">Insert jornada</button>
+    </div>
+    <div class="contCanvas">        
+        <canvas id="canvas" width="640px" height="340px"></canvas>
+    </div>
+    
+    <div id="contItin">
+
+    </div>
+    <button id="dibujar" onclick="dibujarLinea()">Dibujar</button>
+    <input type="color" name="colorLine" id="colorLine">
+    <button id="limpiar" onclick="limpiarLinea()">Borrar lineas</button>
+    
+    <div class="alim">
+        <form action="" id="datosInicio">
+            <div id="contInteg">                       
+                <label for="integrantes" >integrantes</label>
+                <input type="number" name="integrantes" 
+                id="integrantes" value ="1"><br/>
+                <input type="button" form="datosInicio" 
+                onclick="arranque()" value="Datos Expe.">
+            </div>           
+        </form>
+        <h1></h1>
+    </div>
+    
+
+
+    <script src="./itinerarios2.js"></script>
+    
+</body>
+</html>

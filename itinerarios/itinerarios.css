@@ -1,0 +1,43 @@
+body{
+    display: block;
+    width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color:aliceblue;
+    font-family: 'Libre Franklin', sans-serif;
+}
+.contCanvas{
+    display: flex;
+    justify-content: end;
+}
+#canvas{
+    background-color: rgb(173, 151, 194);
+    margin-top: 40px;
+    margin-right: 80px;
+}
+.contCamp{
+    margin: 20px;
+}
+.inputCell, #insert{
+    margin: 8px;
+    width: 110px;
+}
+#contItin{
+    display: flex;
+    width: 500px;
+    margin-left: 150px;
+    margin-top: 10px;
+}
+#dibujar{
+    margin: 30px;
+    margin-right: 57px;
+}
+
+#contInteg{
+    display: flex;
+    align-items: center;
+}
+#contInteg > #integrantes{
+    margin-left: 10px; 
+    margin-right: 10px;   
+}
