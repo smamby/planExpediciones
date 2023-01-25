@@ -41,6 +41,10 @@ body{
 .contCanvas{
     display: flex;
 }
+#contTitleCanvas{
+    display: flex;
+    justify-content: center;
+}
 #titleCanvas{
     margin-top: 40px;
     text-align: center;

@@ -1,3 +1,4 @@
+
 var lugar = document.getElementById('location');
 var intro = document.getElementById('intro').value;
 var outro = document.getElementById('outro').value;
@@ -144,8 +145,8 @@ function insert(){
     tramosDim.push(tFinal)
     console.log(camps);
     document.getElementById('nameCamp').value = '';
-    document.getElementById('distanciaTramoJ').value = '';
-    document.getElementById('tiempoJornadaJ').value = '';
+    document.getElementById('distanciaTramoJ').value = 1;
+    document.getElementById('tiempoJornadaJ').value = 1;
     document.getElementById('nameCamp').focus();
 
     moduloV = 300/camps.length;
@@ -156,10 +157,13 @@ function insert(){
 var moduloV = 300/camps.length;
 var moduloH = 500/(jor+1);
 console.log('modulo', moduloH, moduloV);
-
+var getNumDay;
 function diasSemana(f,i){
+    console.log(f);
     var FF = new Date(Date.parse(f)+((1+i)*86400000))
+    console.log(FF);
     var getDay = (new Date(FF)).getDay();
+    getNumDay = (new Date(FF)).getDate();
     console.log(getDay);    
     switch(getDay){
         case 0:
@@ -191,8 +195,12 @@ function mapearCalendario(){
     moduloH = 500/(jor+1);
     for (var i=0 ; i<=jor ; i++){   
         var dia = diasSemana(intro,i);
+        console.log('intro',intro);
         console.log(dia);
+        // var getNumDay;
+        console.log(getNumDay);
         ctx.font = "11px Arial";
+        ctx.fillText(getNumDay, (h+(moduloH/3)+(moduloH*i)),14)
         ctx.fillText(dia, (h+(moduloH/3)+(moduloH*i)),295+d+d)
     }
 }
@@ -208,6 +216,8 @@ function crearDibujo(){
         select.style.width = moduloH+'px';
         var opt1 = document.createElement('option');
         var opt11 = document.createElement('option');
+        var opt12 = document.createElement('option');
+        var opt13 = document.createElement('option');
         var opt2 = document.createElement('option');
         var opt3 = document.createElement('option');
         var opt4 = document.createElement('option');
@@ -217,7 +227,9 @@ function crearDibujo(){
         var opt8 = document.createElement('option');
         var opt9 = document.createElement('option');
         opt1.value = 'Ascenso';
-        opt11.value = 'Ascenso2camps'
+        opt11.value = 'Ascenso2camps';
+        opt12.value = 'Ascenso3camps';
+        opt13.value = 'None';
         opt2.value = 'Descanso';
         opt3.value = 'Porteo';
         opt4.value = 'Exploracion';
@@ -228,6 +240,8 @@ function crearDibujo(){
         opt9.value = 'Descenso 3 camp';
         opt1.text = 'Ascenso';
         opt11.text = 'Ascenso 2 camps';
+        opt12.text = 'Ascenso 3 camps';
+        opt13.text = 'None';
         opt2.text = 'Descanso';
         opt3.text = 'Porteo';
         opt4.text = 'Exploracion';
@@ -238,6 +252,8 @@ function crearDibujo(){
         opt9.text = 'Descenso 3 camp';
         select.add(opt1);
         select.add(opt11);
+        select.add(opt12);
+        select.add(opt13);
         select.add(opt2);
         select.add(opt3);
         select.add(opt4);
@@ -261,6 +277,7 @@ var k = (300/camps.length);
 //var i = tramosDim[piso];
 var iSup = tramosDim[piso+1];
 var iSup2 = tramosDim[piso+2];
+var iSup3 = tramosDim[piso+3];
 var tramoSumado = [];
 var itinerarios = {marchas: 0, descansos: 0};
 function dibujarLinea(){
@@ -269,7 +286,7 @@ function dibujarLinea(){
     itinerarios.marchas = 0;
     itinerarios.descansos = 0;
     tramoSumado = tramosDim.map(el=>acum += Number(el));
-    console.log(tramoSumado);
+    console.log("tramoSumado",tramoSumado);
     for (var j=0 ; j<=jor ; j++){
         let dia = document.getElementById(`sel${j}`).value;
         console.log(dia);
@@ -277,7 +294,8 @@ function dibujarLinea(){
         var i = tramoSumado[piso];
         var iSup = tramosDim[piso+1];
         var iSup2 = tramosDim[piso+2];
-        console.log('i,iSup: ', i, iSup,iSup2);
+        var iSup3 = tramosDim[piso+3];
+        console.log('i,iSup: ', i, iSup,iSup2,iSup3);
         switch (dia){
             case 'Ascenso':
                 dibAscenso(i,j)
@@ -287,6 +305,15 @@ function dibujarLinea(){
             case 'Ascenso2camps':
                 dibAscenso2Camps(i,j)
                 piso += 2;
+                itinerarios.marchas +=1;
+                break
+            case 'Ascenso3camps':
+                dibAscenso3Camps(i,j)
+                piso += 3;
+                itinerarios.marchas +=1;
+                break
+            case 'None':
+                dibNone(i,j)
                 itinerarios.marchas +=1;
                 break
             case 'Descanso':
@@ -331,6 +358,9 @@ function dibujarLinea(){
         cuquis();
     }
     printResumen();
+     
+    pdfCoqui();
+    cuquis();    
 }
 
 function limpiarLinea(){
@@ -393,7 +423,23 @@ function dibAscenso2Camps(i,j){
     ctx.lineTo((moduloH+h+(moduloH*j)),(300-iSup2)+d);
     ctx.stroke();
 }
-
+function dibAscenso3Camps(i,j){
+    var colorLine = document.getElementById('colorLine').value;
+    ctx.lineWidth = 13;
+    ctx.setLineDash([0,0]);
+    ctx.strokeStyle = colorLine;
+    var iSup3 = tramoSumado[piso+3];
+    console.log(tramoSumado,iSup3);
+    ctx.beginPath();
+    ctx.moveTo(0+h+(moduloH*j),(300-i)+d);
+    ctx.lineTo((moduloH/5)+h+(moduloH*j),(300-i)+d);
+    ctx.lineTo((moduloH/5*4)+h+(moduloH*j),(300-iSup3)+d);
+    ctx.lineTo((moduloH+h+(moduloH*j)),(300-iSup3)+d);
+    ctx.stroke();
+}
+function dibNone(i,j){
+    return
+}
 function dibDescanso(i,j){
     ctx.lineWidth = 13;
     ctx.setLineDash([0,0]);
@@ -485,6 +531,7 @@ function cuquis(){
     localStorage.setItem('fechaInicio', document.getElementById('intro').value);
     localStorage.setItem('lugar', document.getElementById('lugarInput').value);
     localStorage.setItem('integrantes', document.getElementById('integrantes').value);
+    localStorage.setItem('imagenItin', JSON.stringify(imagen))
 }
 
 function arrancarAlimentacion(){
@@ -492,18 +539,41 @@ function arrancarAlimentacion(){
     window.location.href= "../alimentacion/index.html";
     arranque()
 }
-function printResumen(){
-    if (intro = ''){
-        alert('ingresa la fecha de inicio')
-    } else {
-        var contLocation = document.getElementById('titleCanvas'); 
-        var location = document.getElementById('lugarInput').value;   
-        var jMSpan = document.getElementById('jM');
-        var jDSpan = document.getElementById('jD');
-        contLocation.innerHTML = location + ' - ' + intro;
-        jMSpan.innerHTML = ' ';
-        jDSpan.innerHTML = ' ';
-        jMSpan.append(itinerarios.marchas);
-        jDSpan.append(itinerarios.descansos);
-    }
+function printResumen(){    
+    var contLocation = document.getElementById('titleCanvas'); 
+    var location = document.getElementById('lugarInput').value;   
+    var jMSpan = document.getElementById('jM');
+    var jDSpan = document.getElementById('jD');
+    introInverted = new Date(Date(intro.parse)).getDate() + '-' + new Date(Date(intro.parse)).getMonth()+1  + '-' + new Date(Date(intro.parse)).getFullYear();
+    contLocation.innerHTML = location + ' - ' + introInverted;
+    jMSpan.innerHTML = ' ';
+    jDSpan.innerHTML = ' ';
+    jMSpan.append(itinerarios.marchas);
+    jDSpan.append(itinerarios.descansos);
 }
+
+
+
+var imagen = '';
+function pdfCoqui(){
+    html2canvas(document.querySelector("#contImprimirPDF"))
+    .then(canvas => {
+      imagen = canvas.toDataURL("image/jpeg");
+    }).catch((error)=>{
+        console.log(error)
+    })
+}
+
+function printPDF2(){
+    html2canvas(document.querySelector("#contImprimirPDF"))
+    .then(canvas => {
+      imagen = canvas.toDataURL("image/jpeg");
+      var win = window.open();
+      win.document.write('<img src="'+imagen+'"/>');
+      win.document.head.innerHTML = '<link rel="stylesheet" href="printitin.css">';
+      
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+  
