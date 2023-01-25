@@ -1,22 +1,63 @@
+html{
+    background-color: #f1f5f5;
+}
+
 body{
-    display: block;
-    width: 750px;
+    display:block;
+    width: 640px;
+    height: auto;
+    margin-top: 0px;
+    margin-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
-    background-color:aliceblue;
+    padding: 20px;
+    background-color:rgb(229, 236, 231);
     font-family: 'Libre Franklin', sans-serif;
+}
+.imgHeader {
+    display: flex;  
+    background-image: url("./assets/img/landscape2.jpg");
+    background-size: cover;
+    border-radius: 10px 10px 50px;
+    height: 165px;
+    color: var(--super-ultra-dark-violet);
+    text-shadow: 1px 3px 1px var(--super-ultra-dark-violet);  
+    justify-content: center;
+    filter: contrast(70%);
+}
+.head{
+    display: flex;
+    height: 120px;
+    align-items: center;
+    color: rgb(241, 211, 187);
+}
+.contInput, .head, .fechaYLugar{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.impNum{
+    width: 50px;
 }
 .contCanvas{
     display: flex;
-    justify-content: end;
+}
+#titleCanvas{
+    margin-top: 40px;
+    text-align: center;
 }
 #canvas{
-    background-color: rgb(173, 151, 194);
-    margin-top: 40px;
-    margin-right: 80px;
+    background-color: rgb(173, 151, 194);    
 }
-.contCamp{
+.contCamp > label{
+    display: inline-block;
+    width: 90px;    
+}
+#contCamp1{
+    margin-top: 50px;
+}
+.contCamp, .alim{
     margin: 20px;
+    
 }
 .inputCell, #insert{
     margin: 8px;
@@ -25,7 +66,7 @@ body{
 #contItin{
     display: flex;
     width: 500px;
-    margin-left: 150px;
+    margin-left: 120px;
     margin-top: 10px;
 }
 #dibujar{
@@ -40,4 +81,11 @@ body{
 #contInteg > #integrantes{
     margin-left: 10px; 
     margin-right: 10px;   
+}
+#contResumen{
+    display: flex;
+    justify-content: center;
+}
+span{
+    color: crimson;
 }

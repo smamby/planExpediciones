@@ -10,62 +10,76 @@
     <title>Itinerarios</title>
 </head>
 <body>
-    <h2>Diseño de itinerarios</h2>
+    <header>
+        <div class="imgHeader" id="imgHeader">
+            <h2 class="head">Diseño de itinerarios</h2>
+            <!-- <button id="styleBtn" onclick="styleLigth()"><img id="imgBtnTheme" src="./assets/img/btnTheme ligth.png" alt=""></button> -->
+        </div>        
+    </header>
+    <h1></h1>    
 
     <form action="" class="fechaYLugar">
         <label for="lugar" class="lugarLabel">Lugar</label>
-        <input type="text" class="lugarInput" id="lugarInput">        
+        <input type="text" class="lugarInput" id="lugarInput">
+        <input type="date" name="intro" id="intro">
+        <input type="date" name="outro" id="outro">       
     </form>
     <h3></h3>
     
-    <div class="contInput">
-        <input type="date" name="intro" id="intro">
-        <input type="date" name="outro" id="outro">
+    <!-- <div class="contInput">
+        
         <button id="jornadas" onclick="jornadas()">jornadas</button>
-    </div>
-    <div class="contCamp">
-        <label for="inicio">Inicio</label>
+    </div> -->
+    <div class="contCamp" id="contCamp1">
+        <label for="inicio" class="inicio">Inicio</label>
         <input type="text" name="inicio" id="inicio" placeholder="estacion, ciudad, cb" class="inputCell" >
-        <input type="number" name="distanciaTramoI" id="distanciaTramoI" value="0" class="inputCell">Km
-        <input type="number" name="tiempoJornadaI" id="tiempoJornadaI" value="0" class="inputCell">hs<br>     
-        <label for="objetivo">Cierre</label>
+        <input type="number" class="impNum" name="distanciaTramoI" id="distanciaTramoI" value="0" class="inputCell">Km
+        <input type="number" class="impNum" name="tiempoJornadaI" id="tiempoJornadaI" value="0" class="inputCell">hs<br>     
+        <label for="objetivo" class="objetivo">Objetivo</label>
         <input type="text" name="objetivo" id="objetivo" placeholder="objetivo" class="inputCell" >
-        <input type="number" name="distanciaTramoO" id="distanciaTramoO" placeholder="distancia del tramo" class="inputCell">Km
-        <input type="number" name="tiempoJornadaO" id="tiempoJornadaO" placeholder="tiempo de la Jornada" class="inputCell">hs
+        <input type="number" class="impNum" name="distanciaTramoO" id="distanciaTramoO" placeholder="distancia del tramo" class="inputCell">Km
+        <input type="number" class="impNum" name="tiempoJornadaO" id="tiempoJornadaO" placeholder="tiempo de la Jornada" class="inputCell">hs
         <button name="insert" id="insert" onclick="datosIniciales()">Datos Iniciales</button>
     </div>
     <div class="contCamp">
-        <label for="jornada">Jornada</label>
+        <label for="jornada">Camps</label>
         <input type="text" name="nameCamp" id="nameCamp" placeholder="destino de jornada" class="inputCell" >
-        <input type="number" name="distanciaTramoJ" id="distanciaTramoJ" placeholder="distancia del tramo" class="inputCell">Km
-        <input type="number" name="tiempoJornadaJ" id="tiempoJornadaJ" placeholder="tiempo de la Jornada" class="inputCell">hs
+        <input type="number" class="impNum" name="distanciaTramoJ" id="distanciaTramoJ" placeholder="distancia del tramo" class="inputCell">Km
+        <input type="number" class="impNum" name="tiempoJornadaJ" id="tiempoJornadaJ" placeholder="tiempo de la Jornada" class="inputCell">hs
         <button name="insert" id="insert" onclick="insert()">Insert jornada</button>
     </div>
-    <div class="contCanvas">        
+    <p id="titleCanvas">Expedicion: </p>
+    <div class="contCanvas">       
         <canvas id="canvas" width="640px" height="340px"></canvas>
     </div>
-    
     <div id="contItin">
-
+        <!-- aca se imprimen los selects -->
     </div>
+    
     <button id="dibujar" onclick="dibujarLinea()">Dibujar</button>
     <input type="color" name="colorLine" id="colorLine">
     <button id="limpiar" onclick="limpiarLinea()">Borrar lineas</button>
+    <div id="contResumen">
+        <p>Jornadas de marcha: <span id="jM"></span> - Jornadas de descanso: <span id="jD"></span></p>
+    </div>
     
     <div class="alim">
+        <h3>Calcular provisiones</h3>
         <form action="" id="datosInicio">
             <div id="contInteg">                       
                 <label for="integrantes" >integrantes</label>
-                <input type="number" name="integrantes" 
+                <input type="number" class="impNum"  name="integrantes" 
                 id="integrantes" value ="1"><br/>
                 <input type="button" form="datosInicio" 
-                onclick="arranque()" value="Datos Expe.">
+                onclick="arrancarAlimentacion()" value="Provisiones">
             </div>           
         </form>
         <h1></h1>
     </div>
     
 
+
+    
 
     <script src="./itinerarios2.js"></script>
     

@@ -1,3 +1,4 @@
+var lugar = document.getElementById('location');
 var intro = document.getElementById('intro').value;
 var outro = document.getElementById('outro').value;
 var jor;
@@ -6,7 +7,7 @@ const h = 120;
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 
-var jornadas = () => {
+function jornadas(){
     intro = document.getElementById('intro').value;
     outro = document.getElementById('outro').value;
     introParse = Date.parse(document.getElementById('intro').value);
@@ -17,29 +18,32 @@ var jornadas = () => {
     dibujarBase();
     mapearCalendario()
 };
-console.log(jornadas());
 
-function dibujarBase(){    
-    const d = 20;
-    const h = 120;
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = '#907296';
-    ctx.setLineDash([1,0])
-    ctx.beginPath();
-    ctx.moveTo(0+h,0+d);
-    ctx.lineTo(0+h,340-d);
-    ctx.lineTo(500+h,340-d);
-    ctx.lineTo(500+h,0+d);
-    ctx.lineTo(0+h,0+d);
-    ctx.stroke();
-    var divJor = 500 / (jor + 1);
-    console.log(divJor)
-    for (var i = 0 ; i <= jor ; i++){
+function dibujarBase(){
+    if (intro == '' || outro == ''){
+        alert('ingresa la fecha de inicio')
+    } else {
+        const d = 20;
+        const h = 120;
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = '#907296';
+        ctx.setLineDash([1,0])
         ctx.beginPath();
-        ctx.moveTo((divJor*i)+h,0+d);
-        ctx.lineTo((divJor*i)+h,340-d);
+        ctx.moveTo(0+h,0+d);
+        ctx.lineTo(0+h,340-d);
+        ctx.lineTo(500+h,340-d);
+        ctx.lineTo(500+h,0+d);
+        ctx.lineTo(0+h,0+d);
         ctx.stroke();
-    };
+        var divJor = 500 / (jor + 1);
+        console.log(divJor)
+        for (var i = 0 ; i <= jor ; i++){
+            ctx.beginPath();
+            ctx.moveTo((divJor*i)+h,0+d);
+            ctx.lineTo((divJor*i)+h,340-d);
+            ctx.stroke();
+        };
+    };    
 };
 
 var inicio = document.getElementById('inicio').value;
@@ -262,6 +266,8 @@ var itinerarios = {marchas: 0, descansos: 0};
 function dibujarLinea(){
     piso = 0;
     var acum = 0;
+    itinerarios.marchas = 0;
+    itinerarios.descansos = 0;
     tramoSumado = tramosDim.map(el=>acum += Number(el));
     console.log(tramoSumado);
     for (var j=0 ; j<=jor ; j++){
@@ -324,6 +330,7 @@ function dibujarLinea(){
         }
         cuquis();
     }
+    printResumen();
 }
 
 function limpiarLinea(){
@@ -356,7 +363,6 @@ function limpiarLinea(){
     //moduloV = 1; //300/camps.length;
     moduloH = 500/(jor+1);
     console.log('modulo', moduloH, moduloV);
-
 }
 
 function dibAscenso(i,j){
@@ -475,6 +481,29 @@ function dibDesensoXCamp(i,j,p){
 }
 
 function cuquis(){
-    localStorage.setItem('itinerarios', JSON.stringify(itinerarios))
-    localStorage.setItem('fechaInicio', document.getElementById('intro').value)
+    localStorage.setItem('itinerarios', JSON.stringify(itinerarios));
+    localStorage.setItem('fechaInicio', document.getElementById('intro').value);
+    localStorage.setItem('lugar', document.getElementById('lugarInput').value);
+    localStorage.setItem('integrantes', document.getElementById('integrantes').value);
+}
+
+function arrancarAlimentacion(){
+    cuquis()
+    window.location.href= "../alimentacion/index.html";
+    arranque()
+}
+function printResumen(){
+    if (intro = ''){
+        alert('ingresa la fecha de inicio')
+    } else {
+        var contLocation = document.getElementById('titleCanvas'); 
+        var location = document.getElementById('lugarInput').value;   
+        var jMSpan = document.getElementById('jM');
+        var jDSpan = document.getElementById('jD');
+        contLocation.innerHTML = location + ' - ' + intro;
+        jMSpan.innerHTML = ' ';
+        jDSpan.innerHTML = ' ';
+        jMSpan.append(itinerarios.marchas);
+        jDSpan.append(itinerarios.descansos);
+    }
 }
