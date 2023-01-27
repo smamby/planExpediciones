@@ -531,7 +531,9 @@ function cuquis(){
     localStorage.setItem('fechaInicio', document.getElementById('intro').value);
     localStorage.setItem('lugar', document.getElementById('lugarInput').value);
     localStorage.setItem('integrantes', document.getElementById('integrantes').value);
-    localStorage.setItem('imagenItin', JSON.stringify(imagen))
+    setTimeout(()=> {
+        localStorage.setItem('imagenItin', JSON.stringify(imagen));
+    }, 500);
 }
 
 function arrancarAlimentacion(){
@@ -544,7 +546,7 @@ function printResumen(){
     var location = document.getElementById('lugarInput').value;   
     var jMSpan = document.getElementById('jM');
     var jDSpan = document.getElementById('jD');
-    introInverted = new Date(Date(intro.parse)).getDate() + '-' + new Date(Date(intro.parse)).getMonth()+1  + '-' + new Date(Date(intro.parse)).getFullYear();
+    introInverted = (Number(new Date(intro).getDate())+1) + '-' + (Number(new Date(intro).getMonth())+1)  + '-' + new Date(intro).getFullYear();
     contLocation.innerHTML = location + ' - ' + introInverted;
     jMSpan.innerHTML = ' ';
     jDSpan.innerHTML = ' ';
