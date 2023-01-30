@@ -11,24 +11,35 @@ function styleLigth(){
     };
 };
 
-var lugar = "";
-var fecha = "";
-var diasDescanso = 0;
-var diasMarcha = 0;  
-var integrantes=1;
+// var lugar = "";
+// var fecha = "";
+// var diasDescanso = 0;
+// var diasMarcha = 0;  
+// var integrantes=1;
+var itinerarios = JSON.parse(localStorage.getItem('itinerarios'));
+var diasDescanso = itinerarios.descansos;
+var diasMarcha = itinerarios.marchas
+var fecha = localStorage.getItem('fechaInicio');
+var lugar = localStorage.getItem('lugar');
+var integrantes = JSON.parse(localStorage.getItem('integrantes'));
 var integ = parseInt(integrantes);
 var datosExpeCargados=false;
-function preArranque() {
-    document.getElementById("lugarInput").focus();
-}
-preArranque();
+
+    
+    
+
+// function preArranque() {  
+
+//     document.getElementById("lugarInput").focus();
+// }
+// preArranque();
 
 function arranque(){   
-    lugar = document.getElementById("lugarInput").value;
-    fecha = document.getElementById("fechaInput").value;
-    diasMarcha = document.getElementById('marchas').value;
-    diasDescanso = document.getElementById('descanso').value;
-    integrantes = parseInt(document.getElementById('integrantes').value);
+    document.getElementById("lugarInput").value = lugar;
+    document.getElementById("fechaInput").value = fecha;
+    document.getElementById('marchas').value = diasMarcha;
+    document.getElementById('descanso').value = diasDescanso;
+    document.getElementById('integrantes').value = integrantes;
     console.log(lugar);
     console.log(fecha);
 
@@ -59,8 +70,9 @@ function arranque(){
         condPlatoCargado();
     };
 };
+arranque()
 
-var integrantes = document.getElementById('integrantes').value;
+//var integrantes = document.getElementById('integrantes').value;
 var integ = parseInt(integrantes);
 var cenas;
 var platosCenas = [];

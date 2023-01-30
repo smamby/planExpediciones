@@ -120,7 +120,11 @@ function buscarYborrarPlatoMenu(){
     console.log("plato ya existe ANTES", tablaPlatosYDias);    
     tablaPlatosYDias = [...nuevaTabla];
     cargaIngrediente=true;
-    comidasComputadas = comidasComputadas 
+    comidasComputadas = comidasComputadas;
+    var indexPlatoInsertIngerd = tablaPlatosYDias.findIndex(i=>i.plato == platoNombre)
+    console.log('recupPlato', indexPlatoInsertIngerd)
+    document.getElementById('cantidadCenas').value = tablaPlatosYDias[indexPlatoInsertIngerd].diasRepet;
+    diasPlato = tablaPlatosYDias[indexPlatoInsertIngerd].diasRepet;
 }
 
 function condCargarIngredientesPlato() {

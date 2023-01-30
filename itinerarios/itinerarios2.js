@@ -528,6 +528,7 @@ function dibDesensoXCamp(i,j,p){
 
 function cuquis(){
     localStorage.setItem('itinerarios', JSON.stringify(itinerarios));
+    localStorage.setItem('fechaInicioInvert', JSON.stringify(introInverted));
     localStorage.setItem('fechaInicio', document.getElementById('intro').value);
     localStorage.setItem('lugar', document.getElementById('lugarInput').value);
     localStorage.setItem('integrantes', document.getElementById('integrantes').value);
@@ -541,13 +542,14 @@ function arrancarAlimentacion(){
     window.location.href= "../alimentacion/index.html";
     arranque()
 }
+var introInverted;
 function printResumen(){    
     var contLocation = document.getElementById('titleCanvas'); 
     var location = document.getElementById('lugarInput').value;   
     var jMSpan = document.getElementById('jM');
     var jDSpan = document.getElementById('jD');
     introInverted = (Number(new Date(intro).getDate())+1) + '-' + (Number(new Date(intro).getMonth())+1)  + '-' + new Date(intro).getFullYear();
-    contLocation.innerHTML = location + ' - ' + introInverted;
+    contLocation.innerHTML = location + ' | ' + introInverted;
     jMSpan.innerHTML = ' ';
     jDSpan.innerHTML = ' ';
     jMSpan.append(itinerarios.marchas);

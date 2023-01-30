@@ -128,6 +128,10 @@ body {
   justify-content: center;
   align-items: center;
 }
+#explicacion{
+  margin-right: 45px;
+  margin-left: 45px;
+}
 #contComida, #desayunos, #ComidaMarchas{
   border: 1px solid var(--light-violet);
   padding: 10px;
