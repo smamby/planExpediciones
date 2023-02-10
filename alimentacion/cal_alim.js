@@ -70,7 +70,8 @@ function arranque(){
         condPlatoCargado();
     };
 };
-arranque()
+setTimeout(()=>{arranque()},500)
+
 
 //var integrantes = document.getElementById('integrantes').value;
 var integ = parseInt(integrantes);
