@@ -540,7 +540,7 @@ function cuquis(){
 function arrancarAlimentacion(){
     cuquis()
     window.location.href= "../alimentacion/index.html";
-    arranque()
+    setTimeout(()=>{arranque()},500);
 }
 var introInverted;
 function printResumen(){    
