@@ -40,6 +40,9 @@ body{
 }
 #contTitleCanvas{
     display: flex;
+    justify-conten: center;
+}
+#contTitleCanvas p{
     justify-items: center;
 }
 .contCanvas{
