@@ -38,6 +38,9 @@ body{
 .impNum{
     width: 50px;
 }
+#contTitleCanvas{
+    justify-content: center;
+}
 .contCanvas{
     display: flex;
 }
