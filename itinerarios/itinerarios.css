@@ -39,7 +39,8 @@ body{
     width: 50px;
 }
 #contTitleCanvas{
-    justify-content: center;
+    display: flex;
+    justify-items: center;
 }
 .contCanvas{
     display: flex;
