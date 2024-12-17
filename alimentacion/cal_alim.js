@@ -72,6 +72,18 @@ function arranque(){
 };
 setTimeout(()=>{arranque()},500)
 
+function modificarInput() {
+    diasMarcha = parseInt(document.getElementById('marchas').value);
+    diasDescanso = parseInt(document.getElementById('descanso').value);
+    integrantes = parseInt(document.getElementById('integrantes').value);
+    integ = integrantes;
+    itinerarios.descansos = diasMarcha;
+    itinerarios.marchas = diasDescanso;
+    localStorage.setItem('itinerarios', JSON.stringify(itinerarios));
+    localStorage.setItem('integrantes', JSON.stringify(integrantes));
+    arranque();
+}
+
 
 //var integrantes = document.getElementById('integrantes').value;
 var integ = parseInt(integrantes);
